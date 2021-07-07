@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="marginButtom">40dp</dimen>
+    <dimen name="marginButtom">20dp</dimen>
+    <dimen name="margin_bottom_float">40dp</dimen>
+    <dimen name="input_new_task">10dp</dimen>
 </resources>
