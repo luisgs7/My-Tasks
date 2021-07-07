@@ -38,6 +38,13 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        loadingListTask();
+    }
+
     public void loadingListTask(){
 
         Task task1 = new Task();
@@ -45,8 +52,12 @@ public class MainActivity extends AppCompatActivity {
         taskList.add(task1);
 
         Task task2 = new Task();
-        task1.setNameTask("Estudar Kotlin");
+        task2.setNameTask("Estudar Kotlin");
         taskList.add(task2);
+
+        Task task3 = new Task();
+        task3.setNameTask("Estudar Python");
+        taskList.add(task3);
 
 
         taskAdapter = new TaskAdapter(taskList);
@@ -56,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(), LinearLayout.VERTICAL));
 
+        recyclerView.setAdapter(taskAdapter);
     }
 
 }

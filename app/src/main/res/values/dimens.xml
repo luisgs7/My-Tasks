@@ -3,4 +3,6 @@
     <dimen name="marginButtom">20dp</dimen>
     <dimen name="margin_bottom_float">40dp</dimen>
     <dimen name="input_new_task">10dp</dimen>
+    <dimen name="text_list_task">10dp</dimen>
+    <dimen name="item_list">18sp</dimen>
 </resources>
