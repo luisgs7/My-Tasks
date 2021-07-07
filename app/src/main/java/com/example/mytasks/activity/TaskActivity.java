@@ -1,4 +1,4 @@
-package com.example.mytasks.controller;
+package com.example.mytasks.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import com.example.mytasks.R;
 
-public class addTask extends AppCompatActivity {
+public class TaskActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
