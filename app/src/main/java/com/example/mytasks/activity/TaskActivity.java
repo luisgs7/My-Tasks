@@ -1,8 +1,10 @@
-package com.example.mytasks;
+package com.example.mytasks.controller;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.mytasks.R;
 
 public class addTask extends AppCompatActivity {
 
