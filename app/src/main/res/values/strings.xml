@@ -6,4 +6,9 @@
     <string name="task_save">Tarefa Salva com Sucesso</string>
     <string name="task_update">Task Atualizada com Sucesso</string>
     <string name="task_update_error">Erro ao Atualizar Task</string>
+    <string name="delete_task">Confirmar exclusão</string>
+    <string name="yes">Sim</string>
+    <string name="no">Não</string>
+    <string name="task_delete">Task Deletada com Sucesso</string>
+    <string name="task_delete_error">Erro ao deletar Task</string>
 </resources>
