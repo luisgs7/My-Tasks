@@ -41,7 +41,22 @@ public class TaskDAO implements ITaskDao{
 
     @Override
     public boolean update(Task task) {
-        return false;
+
+        ContentValues cv = new ContentValues();
+        cv.put("name", task.getNameTask());
+
+
+        try {
+
+            String[] args = {task.getId().toString()};
+            write.update(DbTaskHelper.TABLE_TASK, cv, "id=?", args);
+            Log.i("INFO","Sucess the update task");
+        }catch (Exception e){
+            Log.i("INFO","Erro the update task " + e.getMessage());
+            return false;
+        }
+
+        return true;
     }
 
     @Override
