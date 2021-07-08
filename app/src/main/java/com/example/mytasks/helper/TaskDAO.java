@@ -61,7 +61,17 @@ public class TaskDAO implements ITaskDao{
 
     @Override
     public boolean delete(Task task) {
-        return false;
+
+        try {
+            String[] args = {task.getId().toString()};
+            write.delete(DbTaskHelper.TABLE_TASK, "id=?", args);
+            Log.i("INFO","Sucess the delete task");
+        }catch (Exception e){
+            Log.i("INFO","Erro the delete task " + e.getMessage());
+            return false;
+        }
+
+        return true;
     }
 
     @Override
