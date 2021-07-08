@@ -3,4 +3,7 @@
     <string name="add_task">Digite uma tarefa</string>
     <string name="save_task">Salvar</string>
     <string name="task_validation">Digite o nome de uma Task!</string>
+    <string name="task_save">Tarefa Salva com Sucesso</string>
+    <string name="task_update">Task Atualizada com Sucesso</string>
+    <string name="task_update_error">Erro ao Atualizar Task</string>
 </resources>
