@@ -5,12 +5,19 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 
 import com.example.mytasks.R;
 import com.example.mytasks.adapter.TaskAdapter;
+import com.example.mytasks.helper.DbTaskHelper;
+import com.example.mytasks.helper.RecyclerItemClickListener;
+import com.example.mytasks.helper.TaskDAO;
 import com.example.mytasks.model.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -32,6 +39,40 @@ public class MainActivity extends AppCompatActivity {
         floatingActionButton = findViewById(R.id.float_button);
         recyclerView = findViewById(R.id.recyclerTask);
 
+       /*  DbTaskHelper db = new DbTaskHelper(getApplicationContext());
+
+        ContentValues cv = new ContentValues();
+        cv.put("nome", "teste");
+
+        db.getWritableDatabase().insert("task", null, cv);
+
+        */
+
+
+        recyclerView.addOnItemTouchListener(
+                new RecyclerItemClickListener(
+                        getApplicationContext(),
+                        recyclerView,
+                        new RecyclerItemClickListener.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(View view, int position) {
+                                Log.i("item", "onItemClick");
+                            }
+
+                            @Override
+                            public void onLongItemClick(View view, int position) {
+                                Log.i("item", "onLongClick");
+                            }
+
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                            }
+                        }
+                )
+        );
+
+
         floatingActionButton.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), TaskActivity.class);
             startActivity(intent);
@@ -47,18 +88,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void loadingListTask(){
 
-        Task task1 = new Task();
-        task1.setNameTask("Estudar java");
-        taskList.add(task1);
-
-        Task task2 = new Task();
-        task2.setNameTask("Estudar Kotlin");
-        taskList.add(task2);
-
-        Task task3 = new Task();
-        task3.setNameTask("Estudar Python");
-        taskList.add(task3);
-
+        TaskDAO taskDAO = new TaskDAO(getApplicationContext());
+        taskList = taskDAO.list();
 
         taskAdapter = new TaskAdapter(taskList);
 
