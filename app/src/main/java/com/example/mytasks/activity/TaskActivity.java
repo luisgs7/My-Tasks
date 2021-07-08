@@ -16,6 +16,7 @@ import com.google.android.material.textfield.TextInputEditText;
 public class TaskActivity extends AppCompatActivity {
 
     private TextInputEditText editText;
+    private Task taskAtual;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +24,12 @@ public class TaskActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_task);
 
         editText = findViewById(R.id.edit_task);
+
+        //Update
+        taskAtual = (Task) getIntent().getSerializableExtra("taskSelected");
+        if (taskAtual != null){
+            editText.setText(taskAtual.getNameTask());
+        }
 
     }
 
@@ -37,18 +44,41 @@ public class TaskActivity extends AppCompatActivity {
 
         switch (item.getItemId()){
             case R.id.menu_save:
+
                 TaskDAO taskDAO = new TaskDAO(getApplicationContext());
 
-                String nameTask = editText.getText().toString();
+                if(taskAtual != null){
+                    String nameTask = editText.getText().toString();
+                    if(!nameTask.isEmpty()){
+                        Task task = new Task();
+                        task.setNameTask(nameTask);
+                        task.setId(taskAtual.getId());
 
-                if(!nameTask.isEmpty() ){
-                    Task task = new Task();
-                    task.setNameTask(nameTask);
-                    taskDAO.save(task);
-                    finish();
+                        if(taskDAO.update(task)){
+                            Toast.makeText(getApplicationContext(), R.string.task_update, Toast.LENGTH_SHORT).show();
+                            finish();
+                        }else{
+                            Toast.makeText(getApplicationContext(), R.string.task_update_error, Toast.LENGTH_SHORT).show();
+                        }
+                    }
                 }else{
-                    Toast.makeText(getApplicationContext(), R.string.task_validation, Toast.LENGTH_LONG).show();
+
+
+                    String nameTask = editText.getText().toString();
+
+                    if(!nameTask.isEmpty() ){
+                        Task task = new Task();
+                        task.setNameTask(nameTask);
+
+                        if(taskDAO.save(task)){
+                            Toast.makeText(getApplicationContext(), R.string.task_save, Toast.LENGTH_SHORT).show();
+                        }
+                        finish();
+                    }else{
+                        Toast.makeText(getApplicationContext(), R.string.task_validation, Toast.LENGTH_SHORT).show();
+                    }
                 }
+
                 break;
         }
         return super.onOptionsItemSelected(item);
